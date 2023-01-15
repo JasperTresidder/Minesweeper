@@ -13,7 +13,7 @@ class Board:
         self.bombs = bombs
         self.cell_size = 30
         self.dx = self.screen.get_size()[0] / 2 - self.cell_size * self.cols / 2
-        self.dy = self.screen.get_size()[1] / 2 - self.cell_size * self.cols / 2
+        self.dy = self.screen.get_size()[1] / 2 - self.cell_size * self.rows / 2
         for i in range(cols):
             for j in range(rows):
                 self.board.append(Cell(i, j, self.cols))
@@ -51,8 +51,15 @@ class Board:
             count += 1
 
     def draw(self):
+        revealed = 0
         for cell in self.board:
+            if cell.revealed:
+                revealed += 1
+            if cell.revealed and cell.bomb:
+                revealed = 10000000
             cell.draw(self.dx, self.dy, self.screen)
+        if self.cols*self.rows - revealed == self.bombs:
+            return True
 
     def right_click(self, location: tuple):
         x = int((location[0] - self.dx) / self.cell_size)
