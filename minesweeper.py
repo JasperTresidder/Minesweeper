@@ -114,11 +114,15 @@ def main():
                     in_game = False
                 if mo == "X":
                     sys.exit()
-                if pygame.mouse.get_pressed()[0]:
+                if (pygame.mouse.get_pressed()[0] and pygame.mouse.get_pressed()[2]) or pygame.mouse.get_pressed()[1]:
+                    if board.middle_clicked(location):
+                        in_game = False
+                        after_game = True
+                elif pygame.mouse.get_pressed()[0]:
                     if board.right_click(location):
                         in_game = False
                         after_game = True
-                if pygame.mouse.get_pressed()[2]:
+                elif pygame.mouse.get_pressed()[2]:
                     board.left_click(location)
                 # menu.draw()
         text = str(round(timeit.default_timer() - starttime, 1))

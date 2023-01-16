@@ -61,6 +61,16 @@ class Board:
         if self.cols*self.rows - revealed == self.bombs:
             return True
 
+    def middle_clicked(self, location: tuple):
+        x = int((location[0] - self.dx) / self.cell_size)
+        y = int((location[1] - self.dy) / self.cell_size)
+        for cell in self.board:
+            if cell.clicked((x, y)):
+                if not cell.flagged:
+                    if cell.revealed:
+                        if self.chord(cell):
+                            return True
+
     def right_click(self, location: tuple):
         x = int((location[0] - self.dx) / self.cell_size)
         y = int((location[1] - self.dy) / self.cell_size)
@@ -86,12 +96,34 @@ class Board:
                 elif k.bomb is False and k not in seen:
                     k.revealed = True
 
+    def chord(self, cell: Cell):
+        n = cell.neighbours()
+        flagged = 0
+        n_temp = []
+        for k in self.board:
+            if (k.location['x'], k.location['y']) in n:
+                if k.flagged:
+                    flagged += 1
+                else:
+                    n_temp.append(k)
+        if flagged == cell.number:
+            for k in n_temp:
+                k.revealed = True
+                if k.number ==0:
+                    self.scatter(k, [])
+                if k.bomb:
+                    return True
+
+
     def left_click(self, location: tuple):
         x = int((location[0] - self.dx) / self.cell_size)
         y = int((location[1] - self.dy) / self.cell_size)
         for cell in self.board:
             if cell.clicked((x, y)):
-                cell.flagged = not cell.flagged
+                if cell.revealed:
+                    cell.flagged = False
+                else:
+                    cell.flagged = not cell.flagged
                 break
 
     def reset(self):
