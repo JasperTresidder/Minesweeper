@@ -1,0 +1,15 @@
+altgraph @ file:///C:/b/abs_f2edualeyv/croot/altgraph_1670426107695/work
+certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
+cx-Freeze==6.13.1
+future @ file:///C:/ci_310/future_1642081234309/work
+lief==0.12.3
+packaging==23.0
+pefile @ file:///C:/b/abs_feg_7trsni/croot/pefile_1670877329726/work
+pygame==2.1.2
+pygame-gui==0.6.8
+pyinstaller @ file:///C:/b/abs_dbsfiidkbn/croot/pyinstaller_1670881068280/work
+pyinstaller-hooks-contrib @ file:///C:/b/abs_c2hemrb3nh/croot/pyinstaller-hooks-contrib_1670877320457/work
+python-i18n==0.3.9
+pywin32==305.1
+pywin32-ctypes @ file:///C:/ci_310/pywin32-ctypes_1642657835512/work
+wincertstore==0.2
